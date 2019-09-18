@@ -1,53 +1,62 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import { FormGroup, FormControl, InputGroup, Glyphicon } from 'react-bootstrap';
+import MusicCard from './components/MusicCard';
+import 'typeface-roboto';
 
-class App extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      query: ''
-    }
-  }
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
-  search () {
-  }
+const useStyles = makeStyles(theme => ({
+     container: {
+          display: 'flex',
+          flexWrap: 'wrap',
+     },
+     textField: {
+          marginLeft: theme.spacing(1),
+          marginRight: theme.spacing(1),
+          width: 200,
+     },
+     dense: {
+          marginTop: 19,
+     },
+     menu: {
+          width: 200,
+     },
+}));
 
-  render () {
-    return (
-      <div className="App">
-        <div className="App-title">Music App</div>
-        <FormGroup>
-          <InputGroup>
-            <FormControl
-              type="text"
-              placeholder="Search for an Artist"
-              value={this.state.query}
-              onChange={event => {this.setState({query: event.target.value})}}
-              onKeyPress={event => {
-                if (event.key === 'Enter') {
-                  this.search()
-                }
-              }}
-            />
-          <InputGroup.Addon onClick={() => this.search()}>
-              <Glyphicon glyph="search"></Glyphicon>
-            </InputGroup.Addon>
-          </InputGroup>
-        </FormGroup>
 
-        <div className="Profile">
-          <div>
-            <div>Artist Picture</div>
-            <div>Artist Name</div>
+
+function App() {
+     const classes = useStyles();
+     const [values, setValues] = React.useState({
+          name: '',
+          age: '',
+          multiline: 'Controlled',
+     });
+
+     const handleChange = name => event => {
+          setValues({ ...values, [name]: event.target.value });
+     };
+
+     return (
+          <div className="App">
+               <header className="App-header">
+                    <div>
+                         <form className={classes.container} noValidate autoComplete="off">
+                              <TextField
+                                   id="standard-name"
+                                   label="Search for song"
+                                   className={classes.textField}
+                                   value={values.name}
+                                   onChange={handleChange('name')}
+                                   margin="normal"
+                              />
+                         </form>
+                    </div>
+                    <MusicCard></MusicCard>
+               </header>
           </div>
-          <div className="Gallery">
-            Gallery
-          </div>
-        </div>
-      </div>
-    )
-  }
+     );
 }
 
 export default App;
