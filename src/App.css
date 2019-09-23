@@ -46,6 +46,13 @@ body {
      border-radius: 3px;
      color: #545454;
      font-size: 13px;
+     transition: 0.2s ease;
+}
+
+.track:hover {
+     background-color: #7979d0;
+     color: white;
+     cursor: pointer;
 }
 
 .cont {
