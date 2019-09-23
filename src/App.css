@@ -51,3 +51,9 @@ body {
 .cont {
      text-align: center;
 }
+
+.current-song {
+     font-size: 14px;
+     font-weight: 500;
+     margin-bottom: 20px;
+}

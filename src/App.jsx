@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 let tracks = [];
 let tracksPlaying = [];
 let counter = 0;
+let currentSong = 'None';
 
 class App extends Component {
      constructor (props) {
@@ -24,6 +25,7 @@ class App extends Component {
                tracksPlaying[i].pause();
                tracksPlaying[i].currentTime = 0;
           }
+          currentSong = tracks[val].title;
           tracksPlaying[counter] = new Audio(tracks[val].preview);
           tracksPlaying[counter].play();
           counter++;
@@ -57,7 +59,7 @@ class App extends Component {
           const audioTracks = [];
           
           for (let i = 0; i <= tracks.length - 1; i++) {
-               audioTracks.push(<div className="track" onClick={() => { this.playTrack(i) }}>{i}: {tracks[i].title}</div>);
+               audioTracks.push(<div className="track" onClick={() => { this.playTrack(i); this.setState(this.state); }}>{i}: {tracks[i].title}</div>);
           }
 
           return (
@@ -84,6 +86,7 @@ class App extends Component {
                               className="search-btn">
                               Refresh list
                          </Button>
+                         <div className="current-song">Current song: {currentSong}</div>
                     </div>
                     <div>
                          <div className="">{audioTracks}</div>
